@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/sayantanm/code/NeuralSynthModeler/core/src/neural_synth_modeler/mlruns/0/8e0bfa8872374a8db14e84e616dc60c7/artifacts
+end_time: 1748534191792
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8e0bfa8872374a8db14e84e616dc60c7
+run_name: overjoyed-koi-327
+run_uuid: 8e0bfa8872374a8db14e84e616dc60c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748534038905
+status: 3
+tags: []
+user_id: sayantanm

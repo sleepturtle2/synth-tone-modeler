@@ -1,0 +1,9 @@
+
+
+[batch]
+chunk_size = 50
+workers = 4
+
+[audio]
+normalize = true
+peak_level = -3.0  # in dB

@@ -1,0 +1,46 @@
+[paths]
+preset_dir = "data/presets" # Source presets
+output_dir = "data/training_data" # Where generated data goes 
+processed_dir = "data/processed"    # Where final organized data is stored
+modified_subdir = "modified"
+audio_subdir = "audio"
+
+[strategies]
+active = "random"
+available = ["random"]
+
+[strategies.random]
+min_change = -0.2  # Relative change for normalized params
+max_change = 0.2   # Relative change for normalized params
+max_params_to_edit = 4
+# # Preset filtering
+# preset_include_list = ["Bowed", "Pluck", "Pad"] 
+# preset_exclude_list = ["Legacy", "Experimental"]
+
+[strategies.random.normalization_ranges]
+"A Volume" = [0.0, 1.0]
+"B Filter Cutoff" = [0.0, 1.0] 
+"Global Tune" = [-1.0, 1.0]
+
+# Parameter filtering
+excluded_params = ["Scene Mode", "Active Scene"]
+included_params = ["A.*", "B Volume"]  # Regex patterns supported
+
+
+[logging]
+level = "INFO"
+file = "logs/neural_synth.log"
+max_bytes = 10485760  # 1MB
+backup_count = 5
+
+[training_data]
+config_path = "data_config.toml"
+output_dir = "data/training_data" #Must match paths.output_dir
+split_ratios = [0.7, 0.15, 0.15]  # Train/Val/Test
+random_seed = 42
+
+[presets]
+source_dir = "data/presets"
+
+[data]
+root = "data"

@@ -1,0 +1,45 @@
+# DDSP Synth Project Setup Guide (macOS M4)
+
+## Dependencies
+1. **System Tools**:
+   - Xcode Command Line Tools
+   - Homebrew
+   - LLVM (via Homebrew)
+2. **Python Libraries**:
+   - Python 3.9
+   - Virtual Environment
+   - TensorFlow-macOS + TensorFlow-Metal
+   - DDSP
+   - librosa, soundfile, matplotlib, JupyterLab
+   - llvmlite, numba
+
+---
+
+## Setup Instructions
+
+### 1. Install System Dependencies
+```bash
+# Install Xcode Command Line Tools
+xcode-select --install
+
+# Install Homebrew (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install LLVM
+brew install llvm
+
+# Add LLVM to PATH (for Apple Silicon)
+echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+echo 'export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"' >> ~/.zshrc
+echo 'export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"' >> ~/.zshrc
+source ~/.zshrc
+
+
+# Install base packages
+pip install tensorflow-macos tensorflow-metal
+
+# Install llvmlite with LLVM from Homebrew
+LLVM_CONFIG=/opt/homebrew/opt/llvm/bin/llvm-config pip install llvmlite
+
+# Install remaining dependencies
+pip install numba librosa soundfile matplotlib jupyterlab ddsp

@@ -1,0 +1,10 @@
+[project]
+name = "neural-synth-modeler"
+version = "0.1.0"
+
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

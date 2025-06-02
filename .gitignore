@@ -1,0 +1,56 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Machine Learning
+*.keras
+*.h5
+models/*
+!models/.gitkeep
+*.pb
+*.tflite
+
+# Logs
+*.log
+logs/
+
+# Java/Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.sublime-*
+
+# macOS
+.DS_Store
+
+# Data
+data/
+*.npy
+*.wav
+*.json  # Comment out if JSON parameter files are needed
+
+# Environment
+.env
+*.env

@@ -1,0 +1,26 @@
+[model]
+# Your model parameters here
+name = "default"
+layers = 3
+units = 128
+osc_params = 10    # Number of oscillator parameters
+filter_params = 8  # Number of filter parameters
+fx_params = 6      # Number of FX parameters
+
+[loss]
+osc_weight = 1.0
+filter_weight = 1.0
+fx_weight = 1.0
+
+[training]
+learning_rate = 0.001
+batch_size = 32
+epochs = 100
+output_dir = "models/training_output" 
+checkpoint_freq = "epoch"
+
+[data]
+root = "data/training_data"  # Points to the base data directory
+train_split = "simple"  # Numeric split for compatibility
+val_split = "medium"    # Numeric split for compatibility
+test_split = 0.1   # Numeric split for compatibility

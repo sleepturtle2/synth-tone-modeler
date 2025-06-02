@@ -1,0 +1,38 @@
+[training]
+batch_size = 32
+epochs = 100
+learning_rate = 0.001
+mixed_precision = true
+output_dir = "models/v1"
+loss = "mse"
+metrics = ["mae"]
+checkpoint_freq = 5  # Save model checkpoint every 5 epochs
+
+
+[data]
+root = "data/training_data"
+train_split = "uncategorized"    # Could also be "complex" or list ["simple", "medium"]
+val_split = "uncategorized"      # Could also be "complex" or list ["simple", "medium"]
+
+
+
+[model]
+
+osc_params = [
+  "Osc 1 Type", "Osc 1 Octave", "Osc 1 Pitch", "Osc 1 Shape",
+  "Osc 1 Width 1", "Osc 1 Width 2", "Osc 1 Unison Detune",
+  "Osc 2 Type", "Osc 2 Octave", "Osc 2 Pitch", "Osc 2 Shape",
+  "Osc 2 Width 1", "Osc 2 Width 2", "Osc 2 Unison Detune",
+  "Osc 3 Type", "Osc 3 Octave", "Osc 3 Pitch", "Osc 3 Shape",
+  "Osc 3 Width 1", "Osc 3 Width 2", "Osc 3 Unison Detune"
+]
+
+filter_params = [
+  "Filter 1 Type", "Filter 1 Subtype", "Filter 1 Cutoff", "Filter 1 Resonance",
+  "Filter 2 Type", "Filter 2 Subtype", "Filter 2 Cutoff", "Filter 2 Resonance"
+]
+
+fx_params = [
+  "FX A1 FX Type", "FX A1 Param 1", "FX A1 Param 2", "FX A1 Param 3",
+  "FX S1 FX Type", "FX S1 Param 1", "FX S1 Param 2", "FX S1 Param 3"
+]
