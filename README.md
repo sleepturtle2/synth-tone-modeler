@@ -13,6 +13,65 @@ Key capabilities:
 
 ![System Architecture Diagram](docs/architecture.png)
 
+
+## Model 
+WTSv2(
+  (mfcc_encoder): Sequential(
+    (0): LayerNorm(normalized_shape=30)
+    (1): GRU(input_size=30, hidden_size=512, batch_first=True)
+    (2): Linear(in_features=512, out_features=16, bias=True)
+  )
+  (feature_combiner): ModuleList(
+    (0): MLP(input_size=1, hidden_size=hidden_size, num_layers=3)  # For pitch
+    (1): MLP(input_size=1, hidden_size=hidden_size, num_layers=3)  # For loudness
+    (2): MLP(input_size=16, hidden_size=hidden_size, num_layers=3) # For MFCCs
+  )
+  (gru_combiner): GRU(input_size=3, hidden_size=hidden_size, batch_first=True)
+  (out_mlp): MLP(input_size=hidden_size*4, hidden_size=hidden_size, num_layers=3)
+  (loudness_mlp): Sequential(
+    (0): Linear(in_features=1, out_features=1, bias=True)
+    (1): Sigmoid()
+  )
+  (proj_matrices): ModuleList(
+    (0): Linear(in_features=hidden_size, out_features=n_harmonic+1, bias=True)  # Harmonic amplitudes
+    (1): Linear(in_features=hidden_size, out_features=n_bands, bias=True)      # Noise bands
+  )
+  (wavetable_generator): Sequential(
+    (0): Conv1d(in_channels=1, out_channels=num_wavetables, kernel_size=16, stride=16)
+    (1): Tanh()
+    (2): Conv1d(in_channels=num_wavetables, out_channels=num_wavetables, kernel_size=8, stride=8)
+    (3): Tanh()
+    (4): Linear(in_features=500, out_features=512, bias=True)  # Wavetable length
+    (5): Tanh()
+  )
+  (attention_wt): Linear(in_features=512, out_features=1, bias=True)
+  (smoothing_control): Sequential(
+    (0): Linear(in_features=512, out_features=1, bias=True)
+    (1): Sigmoid()
+  )
+  (adsr_extractors): ModuleList(
+    (0): GRU(input_size=1, hidden_size=8, batch_first=True, bidirectional=True)  # Attack
+    (1): GRU(input_size=1, hidden_size=8, batch_first=True, bidirectional=True)  # Decay
+    (2): GRU(input_size=1, hidden_size=8, batch_first=True, bidirectional=True)  # Sustain
+  )
+  (adsr_heads): ModuleList(
+    (0): Sequential(  # Attack
+      (0): Linear(in_features=16, out_features=1, bias=True)
+      (1): Sigmoid()
+    )
+    (1): Sequential(  # Decay
+      (0): Linear(in_features=16, out_features=1, bias=True)
+      (1): Sigmoid()
+    )
+    (2): Sequential(  # Sustain
+      (0): Linear(in_features=16, out_features=1, bias=True)
+      (1): Sigmoid()
+    )
+  )
+  (adsr_conv): Conv1d(in_channels=1, out_channels=1, kernel_size=block_size, stride=block_size)
+  (reverb): Reverb(length=sampling_rate, sampling_rate=sampling_rate)
+  (wavetable_synth): WavetableSynthV2(sr=sampling_rate, duration_secs=duration_secs, block_size=block_size, enable_amplitude=True)
+)
 ### Core Components
 
 1. **Data Pipeline**
