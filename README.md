@@ -16,8 +16,8 @@ Key capabilities:
 ## Model 
 ```
 Model architecture reference: 
-https://www.github.io/magenta/ddsp
-https://www.github.io/gudgud96/syntheon
+https://github.com/magenta/ddsp
+https://github.com/gudgud96/syntheon
 
 model name - Wave Table Synthesizer v2 
 
